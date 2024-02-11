@@ -1,0 +1,216 @@
+/* Định dạng các thuộc tính chung cho trang */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+select {
+  width: 120px;
+  height: 40px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  border: 2px solid #333;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+option {
+  color: #fff;
+  background-color: #333;
+}
+
+
+option:checked {
+  color: #333;
+  background-color: #fff;
+}
+
+/* Thiết lập kiểu chung cho .page-header */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    height: 80px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Thêm bóng đổ cho .page-header */
+}
+
+/* Thiết lập kiểu cho tiêu đề trong .page-header */
+.page-header h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 20px; /* Thêm khoảng cách bên trái cho tiêu đề */
+}
+
+/* Thiết lập kiểu cho nút trong .page-header */
+.page-header button {
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #333; /* Thay đổi màu nền của nút */
+}
+
+/* Thiết lập kiểu khi di chuột qua nút */
+.page-header button:hover {
+    background-color: #999; /* Thay đổi màu nền khi di chuột qua nút */
+}
+
+
+
+/* Định dạng thanh tìm kiếm */
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    padding-left: 20px;
+}
+
+.search-container button {
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #0099ff;
+    color: white;
+    margin-left: 10px;
+}
+
+/* Định dạng sidebar của trang */
+.page-sidebar {
+    width: 250px;
+    height: calc(100vh - 80px);
+    background-color: #333333;
+    position: fixed;
+    top: 80px;
+}
+
+/* Định dạng nút thu gọn sidebar */
+#collapse-button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: #333333;
+    color: white;
+}
+
+/* Định dạng danh sách các mục quản lý */
+.sidebar-menu {
+    list-style-type: none;
+}
+
+.sidebar-item {
+    height: 50px;
+}
+
+.sidebar-item a {
+    display:block;
+    width :100%;
+	height :100%;
+	text-decoration:none;
+	color:white;
+	padding-left :20px;
+	line-height :50px;
+	font-size :18px;
+	background-color :#333333;
+	border-bottom :1px solid #444444;
+}
+
+.sidebar-item:hover a, .sidebar-item.active a{
+	background-color :#0099ff;
+}
+.page-content {
+	margin-left :250px;
+	padding :20px;
+	height :calc(100vh - 80px);
+	overflow-y :auto;
+	background-color :#f0f0f0;
+}
+
+/* Định dạng các phần hiển thị thông tin tổng quan, tài khoản và bài đăng */
+.dashboard-section, .account-section{
+	margin-bottom :20px;
+}
+
+.dashboard-section h2, .account-section h2{
+	font-size :24px;
+	margin-bottom :10px;
+}
+/* Định dạng các thẻ hiển thị số liệu thống kê */
+.card-container {
+	display :flex;
+	justify-content :space-between;
+	flex-wrap :wrap;
+}
+
+.card {
+	width :calc(25% - 10px);
+	height :150px;
+	background-color :white;
+	border-radius :10px;
+	box-shadow :0 0 5px rgba(0,0,0,0.1);
+	margin-bottom :20px;
+	padding :20px;
+
+}
+
+.card h3 {
+	font-size :18px;
+
+}
+
+.card p {
+	font-size :36px;
+
+}
+/* Định dạng các bảng hiển thị thông tin tài khoản và bài đăng */
+.account-table, .post-table {
+	width :100%;
+	border-collapse :collapse;
+
+}
+
+.account-table th, .account-table td, .post-table th, .post-table td {
+	padding :10px;
+	border :1px solid #cccccc;
+	text-align :center;
+
+}
+
+.account-table th, .post-table th {
+	background-color :#0099ff;
+	color :white;
+
+}
+
+/* Định dạng các nút trạng thái và reset pass */
+.reset-button, .status-button{
+	width :100px;
+	height :30px;
+	border :none;
+	border-radius :15px;
+	color :white;
+
+}
+
+.status-button {
+	background-color :#00cc00;
+}
+
+.reset-button {
+	background-color :#cc0000;
+}
+
+

@@ -1,0 +1,106 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Settings {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row pt-4">
+    <div class="col-12 col-xl-8">
+        <div class="card card-body border-0 shadow mb-4">
+            <div class="ms-4">
+                <h2 class="h5 mb-4">{{baidang.tieude}}</h2>
+                <form>
+                    <div class>
+                        <p class="me-4">ID Bài Đăng: {{baidang.id_baidang}} </p>
+                        <p>Ngày đăng: {{baidang.ngaydang}}</p>
+                    </div>
+
+                    <div class="">
+                        <p class="me-4">Giá bán: {{baidang.giaban}} triệu VNĐ</p>
+                        <p>Chủ đăng: {{baidang.chudang}}</p>
+                    </div>
+                    <div class="">
+                        <p class="me-4">Email: {{baidang.tendangnhap.email}} </p>
+                        <p>Số điện thoại: {{baidang.tendangnhap.sdt}}</p>
+                    </div>
+                    <h2 class="h5 my-4">Thông tin nhà</h2>
+                    <div>
+                        Địa chỉ: {{diachi}}
+                    </div>
+                    <div>
+                        <p>{{fh.sotang}} tầng - {{baidang.sopn}} phòng ngủ </p>
+                        <p>Nội thất: {{baidang.tinhtrang}}</p>
+                        <p> Diện tích: {{baidang.dientich}} m^2</p>
+                        <p> Chiều dài: {{baidang.dai}} m x Chiều rộng: {{baidang.dai}} m </p>
+                    </div>
+                    {%if baidang.loai == 'NHA' %}
+                        <div>
+                            <p>Số tầng: {{fh.sotang}}</p>
+                            <p>Loại hình: {{fh.loaihinh}}</p>
+                        </div>
+                    {%else%}
+                        <div>
+                        <p>Lô/ Khu: {{fh.lo}}</p>
+                        <p>Căn: {{fh.macan}}</p>
+                        <p>Tầng: {{fh.sotang}}</p>
+                        <p>Hướng ban công: {{fh.huong}}</p>
+                        </div>
+                    {%endif%}
+                    <div>
+                        <p>Giá trị ước tính: {{gia_dudoan}} Triệu VNĐ</p>
+                        <p>Ước tính dựa trên các đặc trưng của nhà </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-xl-4">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card shadow border-0 text-center p-0">
+
+                    <div class="card-body">
+                        <div id="carouselExample" class="carousel slide">
+                            <div class="carousel-inner">
+                                {% for img in hinhanh %}
+                                <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}">
+                                    <img src="{{ img.nguon }}" class="d-block w-100" height="400px"
+                                        alt="Không có dữ liệu">
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                data-bs-slide="prev">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                                </svg>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                data-bs-slide="next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                </svg>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

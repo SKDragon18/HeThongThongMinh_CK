@@ -1,0 +1,88 @@
+{% extends "layouts/base.html" %}
+{% block title %} Đổi mật khẩu {% endblock %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+{% block content %}
+<main>
+    <section class="mt-5 bg-soft d-flex align-items-center">
+        <div class="container">
+            <p class="text-center">
+            </p>
+            <div class="row justify-content-center form-bg-image"
+                data-background-lg="/static/assets/img/illustrations/signin.svg">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                        <div class="text-center text-md-center mt-md-0">
+                            <h1 class="mb-0 h3">
+                                Đổi mật khẩu
+                            </h1>
+
+                            <p>
+                                {% if msg %}
+                                {{ msg | safe }}
+                                {% else %}
+                                {% endif %}
+                            </p>
+                        </div>
+
+                        <form action= "{% url 'changepass' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Mật khẩu hiện tại</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <span class="fas fa-user-circle"></span>
+                                    </span>
+                                    {{ form.password }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Mật khẩu mới</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <span class="fas fa-user-circle"></span>
+                                    </span>
+                                    {{ form.password1 }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Nhập lại mật khẩu mới</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <span class="fas fa-user-circle"></span>
+                                    </span>
+                                    {{ form.password2 }}
+                                </div>
+                            </div>
+
+                            <div class="d-grid mt-4">
+                                <button type="submit" name="login" class="btn btn-gray-800">Lưu</button>
+                            </div>
+                        </form>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                                {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</div>
+{% endblock content %}
+<a id="edit-button" onclick="editInfo()" class="edit-button">Sửa</a>
+
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+        $("#ngaysinh").datepicker();
+    });
+</script>
+{% endblock javascripts %}

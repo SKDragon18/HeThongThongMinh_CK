@@ -1,0 +1,46 @@
+/*
+
+=========================================================
+* Volt - Free Bootstrap 5 Dashboard
+=========================================================
+
+* Product Page: https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard
+* Copyright 2021 Themesberg (https://www.themesberg.com)
+
+* Designed and coded by https://themesberg.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal. Contact us if you want to remove it.
+
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+// update variables here
+@import "custom/variables";
+@import "../node_modules/bootstrap/scss/functions";
+@import "volt/variables";
+// Third party
+@import '../node_modules/vanillajs-datepicker/sass/datepicker.scss';
+@import "../node_modules/chartist/dist/scss/chartist.scss";
+// Bootstrap
+// Modify utilities here
+@import "volt/utilities";
+
+// scss-docs-end import-stack
+// volt mixins & functions
+@import "volt/mixins";
+@import "volt/functions";
+// Layout
+@import "volt/layout";
+// Components
+@import "volt/components";
+// Forms
+@import "volt/forms";
+// write your custom styles here!
+.navbar{
+    background-color: red;
+}
+.navbar-dashboard{
+    background-color: red;
+}

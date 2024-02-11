@@ -1,0 +1,238 @@
+{% extends "layouts/base.html" %}
+{% load custom_filters %}
+{% block title %} Home {% endblock %}
+{% block stylesheets %}
+
+<style>
+    .like-button {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        justify-content: center;
+        top: 50%;
+        left: 50%;
+        border-radius: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    section{
+        padding-bottom: 0;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<header class="bg-dark py-1">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="text-center text-black">
+            <h1 class="display-4 fw-bolder">LONG MẠCH</h1>
+            <p class="lead fw-normal mb-0">Chuyên bất động sản</p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<form method="get">
+    {{ filter.form }}
+    <input type="submit" value="Lọc">
+</form>
+<section class="py-2">
+    <div class="container px-2 px-lg-5">
+        <div class="row gx-4 gx-lg-2 row-cols-2 row-cols-md-3 row-cols-xl-6">
+            {% for item in filter.qs %}
+            <div class="col mb-2" style="height: 450px;">
+                <div class="card">
+                    <!-- Product image-->
+                    <img class="card-img-top" style="height: 150px ;" src="{{ anh_filter|dict_lookup:item.id_baidang }}" alt="Chưa có dữ liệu" />
+                    <!-- Product details-->
+                    <a href="{% url 'xem_chitiet' item.id_baidang %}" target="_blank">
+                        <div class="card-body p-1">
+                            <div>
+                                <!-- Product name-->
+                                <p class="truncate-text">{{ item.tieude}} </p>
+                            </div>
+                            <div>
+                                <!-- Product price-->
+                                <p><strong style="size: 50px ;">{{ item.giaban }}</strong></p>
+                                <p>{{ item.sopn}} phòng ngủ</p>
+                                <p>{{item.tinh}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="card-footer p-4 pt-0 border-top-0 ">
+                        {% if item.id_baidang not in ds_yeuthich %}
+                        <button class="like-button"  data-post-id="{{item.id_baidang}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        </button>
+                        {% else %}
+                        <button class="like-button" data-post-id="{{item.id_baidang}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<h4 class="ms-5">Mua bán nhà </h4>
+<section class="py-2">
+    <div class="container px-2 px-lg-5">
+        <div class="row gx-4 gx-lg-2 row-cols-2 row-cols-md-3 row-cols-xl-6">
+            {% for item in ds_nha %}
+            <!-- <a href="{% url 'xem_chitiet' item.ID_BAIDANG %}"> -->
+            <div class="col mb-2" style="height: 450px;">
+                <div class="card">
+                    <!-- Product image-->
+                    <img class="card-img-top" style="height: 150px ;" src="{{ item.NGUON }}" alt="Chưa có dữ liệu" />
+                    <!-- Product details-->
+                    <a href="{% url 'xem_chitiet' item.ID_BAIDANG %}" target="_blank">
+                        <div class="card-body p-1">
+                            <div>
+                                <!-- Product name-->
+                                <p class="truncate-text">{{ item.TIEUDE}} </p>
+                            </div>
+                            <div>
+                                <!-- Product price-->
+                                <p><strong style="size: 50px ;">{{ item.GIABAN }}</strong></p>
+                                <p>{{ item.SOPN}} phòng ngủ</p>
+                                <p>{{item.TINH}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="card-footer p-4 pt-0 border-top-0 ">
+                        {% if item.ID_BAIDANG not in ds_yeuthich %}
+                        <button class="like-button"  data-post-id="{{item.ID_BAIDANG}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        </button>
+                        {% else %}
+                        <button class="like-button" data-post-id="{{item.ID_BAIDANG}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Section-->
+<h4 class="ms-5">Mua bán chung cư </h4>
+<section class="py-2">
+    <div class="container px-2 px-lg-5">
+        <div class="row gx-4 gx-lg-2 row-cols-2 row-cols-md-3 row-cols-xl-6">
+            {% for item in ds_chungcu %}
+
+            <div class="col" style="height: 450px;">
+                <div class="card">
+                    <!-- Product image-->
+                    <img class="card-img-top" style="height: 150px ;" src="{{ item.NGUON }}" alt="Chưa có dữ liệu" />
+                    <a href="{% url 'xem_chitiet' item.ID_BAIDANG %}" target="_blank">
+                        <!-- Product details-->
+                        <div class="card-body p-1">
+                            <div>
+                                <!-- Product name-->
+                                <p class="truncate-text">{{ item.TIEUDE}} </p>
+                            </div>
+                            <div>
+                                <!-- Product price-->
+                                <p><strong style="size: 50px ;">{{ item.GIABAN }}</strong></p>
+                                <p>{{ item.SOPN}} phòng ngủ</p>
+                                <p>{{item.TINH}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="card-footer p-4 pt-0 border-top-0 ">
+                        {% if item.ID_BAIDANG not in ds_yeuthich %}
+                        <button class="like-button"  data-post-id="{{item.ID_BAIDANG}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        </button>
+                        {% else %}
+                        <button class="like-button" data-post-id="{{item.ID_BAIDANG}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product actions-->
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
+<!-- Footer-->
+<!-- Bootstrap core JS-->
+{% block javascripts %}
+<script>
+    var csrftoken = getCookie('csrftoken');
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = $.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    $(document).ready(function () {
+        $('.like-button').click(function () {
+            var post_id = $(this).data('post-id');
+            var $button = $(this);
+            var svg = $(this).find('svg');
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'yeuthich' %}",
+                data: { 'post-id': post_id },
+                success: function (data) {
+                    if (data.update === 'success') {
+                        var new_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>';
+                        svg.replaceWith(new_svg);
+                    } else {
+                        var new_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>';
+                        svg.replaceWith(new_svg);
+                        // Hiển thị thông báo cho người dùng   
+                    }
+                },
+                error: function () {
+                    alert('Something went wrong.');
+                }
+            });
+        });
+    });
+</script>
+{% endblock javascripts %}

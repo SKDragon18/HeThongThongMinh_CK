@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+{% block title %} Chuyển dữ liệu sang csv {% endblock %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block content %}
+<form action="{% url 'thuthap'%}" method="post">  
+    {% csrf_token %}
+    <input class='form-control' name='from' type='date'>
+    <input class='form-control' name='to' type='date'>
+    <input class='form-control'  name='file' type='text'>
+    <button name='submit' type='submit'>Nộp</button>
+    {%if message%}
+    {{message}}
+    {%endif%}
+</form>
+{% endblock content %}
+{% block javascripts %}
+{% endblock javascripts %}

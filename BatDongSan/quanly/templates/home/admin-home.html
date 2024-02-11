@@ -1,0 +1,48 @@
+{% extends layouts/base.html%}
+{% load static %}
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Admin</title>
+    <!-- Liên kết file CSS & JS -->
+    <link rel="stylesheet" href="{% static 'css/admin-home.css' %}">
+    <script src="{% static 'js/admin.js' %}"></script>
+</head>
+<body>
+    {% csrf_token %}
+    <!-- Tạo một header chứa tên trang -->
+    <header class="page-header">
+        <div>
+            <h1>Trang Admin</h1>
+        </div>
+        <div>
+            <h1>BẤT ĐỘNG SẢN</h1>
+        </div>
+    </header>
+    <!-- Tạo một sidebar chứa các mục quản lý -->
+
+        <!-- Tạo một danh sách các mục quản lý -->
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active"><a href="/admin/account">Quản lý tài khoản</a></li>
+            <li class="sidebar-item"><a href="/admin/baidang">Quản lý bài đăng</a></li>
+            <li class="sidebar-item"><a href="/admin/infor">Xem thông tin</a></li>
+            <li class="sidebar-item"><a href="/admin/changepass">Đổi mật khẩu</a></li>
+            <li class="sidebar-item"><a href="{% url 'logout' %}">Đăng xuất</a></li>
+        </ul>
+
+
+    <div id="thongke" style="color: black; font-family: Arial; font-size: 20px; text-align: center; background-color: #444888;">
+    <h2 style="color: yellow; text-align: center; font-size: 50px; font-weight: bold;"><mark>Thống kê</mark></h2>
+    <pre><div style="float: left; width: 50%;">
+        <p>Tổng số tài khoản: <b>{{ user_all }}</b></p>
+        <p>Số Admin: <i>{{ user_ad }}</i></p>
+        <p>Số User: <i>{{ user_us }}</i></p>
+    </div></pre>
+    <pre><div style="float: right; width: 50%;">
+        <p>Tổng số bài đăng: {{ baidang_all }}</p>
+        <p>Bài đăng đã duyệt: {{ baidang_1 }}</p>
+    </div></pre>
+</div>
+</body>
+</html>
+

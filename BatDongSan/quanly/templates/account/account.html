@@ -1,0 +1,82 @@
+{% extends "layouts/base.html" %}
+{% block title %} Quản lý tài khoản {% endblock %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+<h3 class="mt-6"> Danh sách tài khoản</h3>
+<label>Trạng thái</label>
+<select type="button" name="status" id="status" onchange="filterUsers()" >
+    <option>---------</option>
+    <option value="all" >Tất cả</option>
+    <option value="active">Hoạt động</option>
+    <option value="locked">Bị khóa</option>
+</select>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên đăng nhập</th>
+            <th>Email</th>
+            <th>Quyền</th>
+            <th>Trạng thái</th>
+            <th align="center">Hành động</th>
+        </tr>
+    </thead>
+    <!--Hiển thị thông tin-->
+
+    <tbody>
+        {% for nguoidung in nguoidung_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ nguoidung.tendangnhap }}</td>
+            <td>{{ nguoidung.email }}</td>
+            <td>{{ nguoidung.phanquyen.tenquyen }}</td>
+            <td>{{ nguoidung.khoa|yesno:"Khóa,Hoạt động" }}</td>
+            <td>
+                <div class="btn-group ps-4">
+                    <a class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu py-0">
+                        <form action="{% url 'quanly-account' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ nguoidung.tendangnhap }}">
+                            <button class="dropdown-item rounded-top" name="button" value="reset">
+                                Reset mật khẩu</button>
+                        </form>
+                        <form action="{% url 'quanly-account' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ nguoidung.tendangnhap }}">
+                            <button class="dropdown-item" name="button" value="status">Trạng thái</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock content %}
+{% block javascripts %}
+<script>
+    function filterUsers() {
+        var status = document.getElementById("status").value;
+        window.location.href = "/quanly/account/?status=" + status;
+    }
+</script>
+{% endblock javascripts %}
